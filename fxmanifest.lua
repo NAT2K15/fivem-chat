@@ -5,8 +5,10 @@ description 'chat management stuff'
 
 ui_page 'html/index.html'
 
-client_script 'cl_chat.lua'
-server_script 'sv_chat.lua'
+
+client_script 'client/cl_chat.lua'
+shared_script 'config.lua'
+server_script 'server/sv_chat.lua'
 
 files {
     'html/index.html',

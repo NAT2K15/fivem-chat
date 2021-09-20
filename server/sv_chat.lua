@@ -12,13 +12,17 @@ AddEventHandler('_chat:messageEntered', function(author, color, message)
         return
     end
 
-    TriggerEvent('chatMessage', source, author, message)
-
-    if not WasEventCanceled() then
-        TriggerClientEvent('chatMessage', -1, author,  { 255, 255, 255 }, message)
-    end
-
-    print(author .. '^7: ' .. message .. '^7')
+    local function_check, msg = chatblacklist(message)
+    if not function_check then
+        TriggerEvent('chatMessage', source, author, message)
+    
+        if not WasEventCanceled() then
+            TriggerClientEvent('chatMessage', -1, author,  { 255, 255, 255 }, message)
+        end
+        print(author .. '^7: ' .. message .. '^7')
+    else 
+        TriggerClientEvent('chatMessage', -1, string.format(config.retrun_message, msg))
+    end  
 end)
 
 AddEventHandler('__cfx_internal:commandFallback', function(command)
@@ -69,3 +73,23 @@ AddEventHandler('onServerResourceStart', function(resName)
         refreshCommands(player)
     end
 end)
+
+
+-- function --
+function chatblacklist(str)
+    local blacklist = false;
+    local word = nil
+    for badword in ipairs(config.words) do
+        if string.match(string.lower(str), config.words[badword]) then
+          blacklist = true
+          word = config.words[badword]
+        else 
+            if(blacklist == true) then
+              blacklist = true
+            else 
+              blakclist = false;
+            end
+        end
+    end
+    return blacklist, word
+end
