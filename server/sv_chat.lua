@@ -21,7 +21,7 @@ AddEventHandler('_chat:messageEntered', function(author, color, message)
         end
         print(author .. '^7: ' .. message .. '^7')
     else 
-        TriggerClientEvent('chatMessage', -1, string.format(config.retrun_message, msg))
+        TriggerClientEvent('chatMessage', author, string.format(config.retrun_message, msg))
     end  
 end)
 
