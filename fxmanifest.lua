@@ -14,7 +14,6 @@ files {
     'html/index.html',
     'html/index.css',
     'html/config.default.js',
-    'html/config.js',
     'html/App.js',
     'html/Message.js',
     'html/Suggestions.js',
